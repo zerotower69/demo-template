@@ -39,12 +39,16 @@ jobs:
         uses: actions/setup-node@v3 # 使用插件 => https://github.com/actions/setup-node
         with: # 插件携带参数
           node-version: 16 # 指定 node 版本
-          cache: 'npm'
-      # step 3. 安装依赖并打包
+      # step 3. 安装pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '8.6.7'
+      # step 4. 安装依赖并打包
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
       - name: Build
-        run: npm run build
+        run: pnpm build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
