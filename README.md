@@ -1,24 +1,14 @@
-# vue2-template
+# zerotower-demo-template
 
-## Project setup
-```
-yarn install
-```
+自用的快速demo搭建模板，省去每次重新搭建项目的繁琐。
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+分为vue3、vue2、react多个版本
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## vue3
+采用pnpm+vite的技术方案
 
-### Lints and fixes files
-```
-yarn lint
-```
+## vue2
+采用pnpm+vue-cli的技术方案
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## react
+待定
