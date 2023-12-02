@@ -1,0 +1,5 @@
+packages:
+  # 直接子目录中的所有包 packages/
+  - 'packages/**'
+  # 所有项目
+  - 'apps/**'

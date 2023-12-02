@@ -1,0 +1,61 @@
+{
+  "name": "vue2-demo-template",
+  "version": "1.0.0",
+  "author": {
+    "name": "zerotower69",
+    "email": "zerotwoer@163.com",
+    "url": "https://github.com/zerotower69"
+  },
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "core-js": "^3.33.3",
+    "dayjs": "^1.11.10",
+    "vue": "^2.6.14",
+    "vue-router": "^3.6.5",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.5",
+    "@babel/eslint-parser": "^7.23.3",
+    "@types/webpack": "^5.28.5",
+    "@vue/cli-plugin-babel": "~5.0.8",
+    "@vue/cli-plugin-eslint": "~5.0.8",
+    "@vue/cli-plugin-router": "~5.0.8",
+    "@vue/cli-plugin-vuex": "~5.0.8",
+    "@vue/cli-service": "~5.0.8",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-jsdoc": "^46.9.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.19.2",
+    "prettier": "^3.1.0",
+    "sass": "^1.69.5",
+    "sass-loader": "^12.6.0",
+    "speed-measure-webpack-plugin": "^1.5.0",
+    "terser-webpack-plugin": "^5.3.9",
+    "unocss": "^0.57.7",
+    "unplugin-vue-define-options": "^1.4.0",
+    "vue-template-compiler": "^2.6.14",
+    "webpack": "^5.89.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zerotower69/demo-template"
+  },
+  "homepage": "https://zerotower69.gitee.io/demo-template",
+  "keywords": [
+    "vue2",
+    "template",
+    "zerotower"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  }
+}

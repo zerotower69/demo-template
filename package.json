@@ -1,0 +1,14 @@
+{
+  "name": "monorepo-demo-template",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint": ""
+  },
+  "dependencies": {
+    "@common/common": "workspace:^1.0.0"
+  },
+  "keywords": [],
+  "author": "zerotower",
+  "license": "MIT"
+}

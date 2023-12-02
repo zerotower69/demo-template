@@ -1,0 +1,13 @@
+{
+  "name": "@common/common",
+  "version": "1.0.0",
+  "description": "common package",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+   "lint": "eslint --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
