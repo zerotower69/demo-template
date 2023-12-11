@@ -1,0 +1,82 @@
+{
+  "name": "nuxt-demo-template",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,vue}": [
+      "echo 'begin to lint staged ts or tsx file'",
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@ant-design-vue/nuxt": "^1.2.0",
+    "@antfu/eslint-config": "^2.4.5",
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
+    "@iconify-json/ant-design": "^1.1.12",
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/color-mode": "^3.3.2",
+    "@pinia/nuxt": "^0.5.1",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "@unocss/nuxt": "^0.58.0",
+    "@vueuse/nuxt": "^10.7.0",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-nuxt": "^4.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-vue": "^9.19.2",
+    "husky": "^8.0.0",
+    "less": "^4.2.0",
+    "lint-staged": "^15.2.0",
+    "nuxt": "^3.8.2",
+    "pinia": "^2.1.7",
+    "prettier": "^3.1.0",
+    "stylelint": "~15.10.0",
+    "stylelint-config-html": "~1.1.0",
+    "stylelint-config-property-sort-order-smacss": "^9.1.0",
+    "stylelint-config-recommended": "~14.0.0",
+    "stylelint-config-recommended-vue": "~1.5.0",
+    "stylelint-config-standard": "~34.0.0",
+    "stylelint-order": "~6.0.4",
+    "stylelint-prettier": "^4.1.0",
+    "vue": "^3.3.10",
+    "vue-router": "^4.2.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "author": "zerotower69",
+  "repository": {
+    "url": "https://github.com/zerotower69/demo-template"
+  },
+  "homepage": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "target": "web",
+  "packageManager": "^pnpm@8.6.7",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "rollup"
+      ],
+      "allowedVersions": {
+        "postcss": "5"
+      }
+    }
+  }
+}
