@@ -20,4 +20,6 @@ mysql:
   logging: true
 logger:
   level: 'debug'
+swagger:
+  enable: true
 
