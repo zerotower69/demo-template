@@ -9,11 +9,13 @@ import { UserModel } from './user/model/user.model';
 import { WinstonModule } from './winston/winston.module';
 import { transports, format } from 'winston';
 import * as chalk from 'chalk';
+import { JwtModule } from '@nestjs/jwt';
 
 const config = getConfig();
 
 const sqlConfig = config['mysql'] ?? {};
 const logConfig = config['logger'] ?? {};
+const jwtConfig = config['jwt'];
 
 @Module({
   imports: [
@@ -42,6 +44,13 @@ const logConfig = config['logger'] ?? {};
           dirname: logConfig?.dirname ?? 'log',
         }),
       ],
+    }),
+    JwtModule.register({
+      global: true,
+      secret: jwtConfig.secret,
+      signOptions: {
+        expiresIn: jwtConfig.expireIn,
+      },
     }),
     SequelizeModule.forRoot({
       host: 'localhost',

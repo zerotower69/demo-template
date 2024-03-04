@@ -13,7 +13,7 @@ export type ServerConfig = {
 export type JWTConfig = {
   //秘钥
   secret: string;
-  //过期时间
+  //过期时间 https://github.com/vercel/ms. 2 days| 1y | 10h | 7d
   expireIn: string;
 };
 
