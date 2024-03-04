@@ -1,0 +1,21 @@
+# 服务配置
+server:
+  host: "localhost"
+  port: 3000
+# JWTModule相关配置
+jwt:
+  secret: "zero"
+  expireIn: '7d' #表示过期时间7天
+# sequelize相关
+mysql:
+  host: 'localhost'
+  port: 3306
+  username: "root"
+  password: "12345678"
+  database: "nest-template"
+  dialect: "mysql"
+  synchronize: true
+  autoLoadModels: true
+  # 打印数据库日志（sequelize）
+  logging: true
+
