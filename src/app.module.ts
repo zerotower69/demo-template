@@ -10,6 +10,8 @@ import { WinstonModule } from './winston/winston.module';
 import { transports, format } from 'winston';
 import * as chalk from 'chalk';
 import { JwtModule } from '@nestjs/jwt';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { HttpCodeInterceptor } from './interceptor/httpCode.interceptor';
 
 const config = getConfig();
 
@@ -66,6 +68,13 @@ const jwtConfig = config['jwt'];
     UserModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    //默认201--200
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: HttpCodeInterceptor,
+    },
+  ],
 })
 export class AppModule {}
