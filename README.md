@@ -158,6 +158,17 @@ getAll() {
 ```
 `code`代表返回的业务状态码，`message`代表返回的响应信息，`data`存储返回的数据，`error`字段不一定存在，其代表错误信息，例如`Bad Request`等。
 
+## 集成winston打印日志并输出日志文件
+本项目使用了[winston](https://www.npmjs.com/package/winston)来控制日志的输出，并把部分配置放入到
+`application.xxx.yaml`文件中。
+
+使用时通过装饰器`@Inject`注入到`Service`或`Controller`中，
+```typescript
+@Inject(WINSTON_LOGGER_TOKEN)
+private logger: MyLogger;
+```
+接着，就可以愉快地使用了！
+
 ## 其它
 如有问题，欢迎[issues](https://github.com/zerotower69/demo-template/issues)提问，如果觉得不错，请给个star。
 
