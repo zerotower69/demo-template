@@ -1,5 +1,5 @@
 import { DynamicModule, Global, Module } from '@nestjs/common';
-import { LoggerOptions, createLogger } from 'winston';
+import { LoggerOptions } from 'winston';
 import { MyLogger } from './MyLogger';
 
 export const WINSTON_LOGGER_TOKEN = 'WINSTON_LOGGER';

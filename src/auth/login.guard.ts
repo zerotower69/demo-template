@@ -8,9 +8,13 @@ import {
 } from '@nestjs/common';
 import { Request } from 'express';
 import { Observable } from 'rxjs';
+import { Reflector } from '@nestjs/core';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
+  @Inject()
+  private reflector: Reflector;
+
   @Inject(JwtService)
   private jwtService: JwtService;
 
@@ -18,6 +22,13 @@ export class LoginGuard implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request: Request = context.switchToHttp().getRequest();
+    const requireLogin = this.reflector.getAllAndOverride('require-login', [
+      context.getClass(),
+      context.getHandler(),
+    ]);
+    if (!requireLogin) {
+      return true;
+    }
 
     const authorization = request.header('authorization') || '';
 

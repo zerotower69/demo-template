@@ -18,6 +18,10 @@ mysql:
   autoLoadModels: true
   # 打印数据库日志（sequelize）
   logging: true
+redis:
+  host: "localhost"
+  port: 6379
+  enableAuth: false
 logger:
   level: 'debug'
 swagger:

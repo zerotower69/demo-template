@@ -10,17 +10,31 @@ import { WinstonModule } from './winston/winston.module';
 import { transports, format } from 'winston';
 import * as chalk from 'chalk';
 import { JwtModule } from '@nestjs/jwt';
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpCodeInterceptor } from './interceptor/httpCode.interceptor';
 import { HelloFilter } from './exception/hello.filter';
 import { UnloginFilter } from './exception/unlogin.filter';
-import { MyValidationPipe } from './pipe/validation.pipe';
+import { RedisOptions } from 'ioredis';
+import { deleteKey } from './utils';
+import { RedisModule } from './redis/redis.module';
 
 const config = getConfig();
 
 const sqlConfig = config['mysql'] ?? {};
 const logConfig = config['logger'] ?? {};
 const jwtConfig = config['jwt'];
+const redisConfig = config['redis'] ?? {};
+let redisOptions: RedisOptions = {
+  port: redisConfig?.port ?? 6379,
+  host: redisConfig?.host ?? '127.0.0.1',
+};
+if (redisConfig.enableAuth) {
+  deleteKey(redisOptions, 'port', 'host', 'enableAuth');
+  redisOptions = {
+    ...redisOptions,
+    ...redisConfig,
+  };
+}
 
 @Module({
   imports: [
@@ -57,6 +71,7 @@ const jwtConfig = config['jwt'];
         expiresIn: jwtConfig.expireIn,
       },
     }),
+    RedisModule.forRoot(redisOptions),
     SequelizeModule.forRoot({
       host: 'localhost',
       port: 3306,

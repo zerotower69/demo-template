@@ -11,3 +11,13 @@ export function md5(str: string) {
 export function getPageOffset(page = 1, limit = 10) {
   return (page - 1) * limit;
 }
+
+export function deleteKey(obj: Record<string, any>, ...keys: string[]) {
+  if (typeof obj === 'object') {
+    keys.forEach((key) => {
+      if (Reflect.has(obj, key)) {
+        Reflect.deleteProperty(obj, key);
+      }
+    });
+  }
+}

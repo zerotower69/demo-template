@@ -7,6 +7,8 @@ import { RegisterDto } from './dto/register.dto';
 import { getPageOffset, md5 } from '../utils';
 import { Res } from '../response';
 import { LoginDto } from './dto/login.dto';
+import { REDIS_TOKEN } from '../redis/redis.module';
+import Redis from 'ioredis';
 
 @Injectable()
 export class UserService {
@@ -14,8 +16,12 @@ export class UserService {
     @InjectModel(UserModel)
     private userModel: typeof UserModel,
   ) {}
+
   @Inject(WINSTON_LOGGER_TOKEN)
   private logger: MyLogger;
+
+  @Inject(REDIS_TOKEN)
+  private redisClient: Redis;
 
   //注册
   async register(user: RegisterDto) {

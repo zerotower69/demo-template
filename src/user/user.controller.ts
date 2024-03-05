@@ -13,7 +13,8 @@ import { RegisterDto } from './dto/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Response } from 'express';
 import { Res as ResBody } from '../response';
-import { LoginGuard } from '../guard/login.guard';
+import { LoginGuard } from '../auth/login.guard';
+import { Auth } from '../auth/auth.decorator';
 
 @Controller('user')
 export class UserController {
@@ -48,7 +49,7 @@ export class UserController {
     return this.userService.register(user);
   }
 
-  @UseGuards(LoginGuard)
+  @Auth()
   @Get('all')
   getAll() {
     return this.userService.getList();
