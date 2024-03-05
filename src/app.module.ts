@@ -10,8 +10,10 @@ import { WinstonModule } from './winston/winston.module';
 import { transports, format } from 'winston';
 import * as chalk from 'chalk';
 import { JwtModule } from '@nestjs/jwt';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpCodeInterceptor } from './interceptor/httpCode.interceptor';
+import { HelloFilter } from './exception/hello.filter';
+import { UnloginFilter } from './exception/unlogin.filter';
 
 const config = getConfig();
 
@@ -74,6 +76,15 @@ const jwtConfig = config['jwt'];
     {
       provide: APP_INTERCEPTOR,
       useClass: HttpCodeInterceptor,
+    },
+    //全局异常过滤器处理
+    {
+      provide: APP_FILTER,
+      useClass: HelloFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: UnloginFilter,
     },
   ],
 })
