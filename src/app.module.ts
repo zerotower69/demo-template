@@ -10,10 +10,11 @@ import { WinstonModule } from './winston/winston.module';
 import { transports, format } from 'winston';
 import * as chalk from 'chalk';
 import { JwtModule } from '@nestjs/jwt';
-import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { HttpCodeInterceptor } from './interceptor/httpCode.interceptor';
 import { HelloFilter } from './exception/hello.filter';
 import { UnloginFilter } from './exception/unlogin.filter';
+import { MyValidationPipe } from './pipe/validation.pipe';
 
 const config = getConfig();
 
