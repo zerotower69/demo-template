@@ -1,24 +1,23 @@
 # 服务配置
 server:
-  host: "127.0.0.1"
+  host: "localhost"
   port: 3000
 # JWTModule相关配置
 jwt:
-  secret: "zero"
+  secret: ""
   expireIn: '7d' #表示过期时间7天
 # sequelize相关
 mysql:
-  host: '127.0.0.1'
-  port: 3306
-  username: "root"
-  password: "12345678"
-  database: "nest-template"
+  host: 'localhost'
+  port: 你的端口
+  username: "你的用户名"
+  password: "你的密码"
+  database: "数据库"
   dialect: "mysql"
-  #生产环境下不要自动加载模型
-  synchronize: false
-  autoLoadModels: false
+  synchronize: true
+  autoLoadModels: true
   # 打印数据库日志（sequelize）
-  logging: false
+  logging: true
   # 连接池配置
   pool:
     max: 5 # 连接池最大连接数量
@@ -26,11 +25,12 @@ mysql:
     acquire: 3000 #
     idle: 10000 #如果一个线程超过10秒钟没有使用过就释放该线程
 redis:
-  enable: true
-  host: "127.0.0.1"
-  port: 6379
+  enable: false #true/false 表示是否启用redis
+  host: ""
+  port: 你的端口
   enableAuth: false
 logger:
   level: 'debug'
 swagger:
   enable: true
+

@@ -10,6 +10,7 @@ import {
   HttpStatus,
   ValidationPipe,
 } from '@nestjs/common';
+import { LoginGuard } from './auth/login.guard';
 
 const config = getConfig();
 const swaggerConfig = config['swagger'] ?? {

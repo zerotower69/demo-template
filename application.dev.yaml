@@ -17,8 +17,15 @@ mysql:
   synchronize: true
   autoLoadModels: true
   # 打印数据库日志（sequelize）
-  logging: true
+  logging: false
+  # 连接池配置
+  pool:
+    max: 5 # 连接池最大连接数量
+    min: 0 # 连接池最小连接数量
+    acquire: 3000 #
+    idle: 10000 #如果一个线程超过10秒钟没有使用过就释放该线程
 redis:
+  enable: true
   host: "localhost"
   port: 6379
   enableAuth: false

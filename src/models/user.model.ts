@@ -7,6 +7,9 @@ import {
   Table,
   Comment,
 } from 'sequelize-typescript';
+import { ManyToMany } from 'typeorm';
+import { RoleModel } from './role.model';
+import { UserRoleModel } from './userRole.model';
 
 @Table({
   //表名
@@ -28,4 +31,7 @@ export class UserModel extends Model {
   @Comment('密码')
   @Column(DataType.STRING(100))
   password: string;
+
+  @ManyToMany(() => RoleModel, () => UserRoleModel)
+  roles: RoleModel[];
 }

@@ -1,0 +1,62 @@
+version: "1.0"
+
+services:
+  #服务名称
+  mysql:
+    image: mysql:8.1.0
+    #指定mysql容器名称
+    container_name: mysql-nest
+    #容器随docker启动自启
+    restart: always
+    ports:
+      #指定mysql主机端口和容器端口的映射关系，宿主机:容器
+      - 3308:3306
+    environment:
+      #设置root用户和密码
+      MYSQL_ROOT_PASSWORD: '12345678'
+      #设置容器时区
+      TZ: 'Asia/Shanghai'
+      #创建初始数据库，后续sql都将在此执行
+      #MYSQL_DATABASE: 'nest-template'
+    # 初始命令
+    command:
+      --default-authentication-plugin=caching_sha2_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_general_ci
+      --explicit_defaults_for_timestamp=true
+    # 数据挂载
+    volumes:
+      #映射日志目录
+      - G:/docker/mysql/log:/var/log
+      #映射数据目录
+      - G:/docker/mysql/data:/var/lib/mysql
+      #映射配置目录
+      #- G:/docker/mysql/conf.d:/ect/mysql/conf.d
+      # 初始执行的SQL文件用于初始化数据库
+      - G:/docker/mysql/init/:/docker-entrypoint-initdb.d/
+    networks:
+      - nest-network
+  redis:
+    image: redis:latest
+    container_name: redis-nest
+    ports:
+      - 6380:6379
+    networks:
+      - nest-network
+  nest-app:
+    image: nest-template:latest
+    container_name: nest-server
+    depends_on:
+      - mysql
+      - redis
+    restart: on-failure
+    environment:
+      - RUNNING_ENV=prod
+    ports:
+      - '3000:3000'
+    networks:
+      - nest-network
+networks:
+  nest-network:
+    # bridge/host/none/overlay/macvlan
+    driver: bridge

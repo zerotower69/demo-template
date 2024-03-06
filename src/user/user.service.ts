@@ -1,7 +1,7 @@
 import { HttpException, Inject, Injectable } from '@nestjs/common';
 import { MyLogger } from '../winston/MyLogger';
 import { WINSTON_LOGGER_TOKEN } from '../winston/winston.module';
-import { UserModel } from './model/user.model';
+import { UserModel } from '../models/user.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { RegisterDto } from './dto/register.dto';
 import { getPageOffset, md5 } from '../utils';

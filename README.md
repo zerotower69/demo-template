@@ -3,12 +3,14 @@
 ## 脚本解释
 该项目最好使用`pnpm`进行管理，如果你没有安装`pnpm`,请使用`npm i -g pnpm`
 ```bash
-pnpm build #打包
+pnpm build #打包(ts编译为js,不是真正意义的打包)
+pnpm build:docker # 将nestjs 应用打包为镜像
 pnpm format #使用prettier格式化
 pnpm start #开发模式下运行，不会热更新
 pnpm start:dev #开发模式下运行，热更新
 pnpm start:debug #开发模式下调试
 pnpm start:prod #生产模式运行
+pnpm start:docker #以容器的方式运行，三个容器(mysql、redis、nestjs应用)
 pnpm lint #eslint检查
 pnpm test #单元测试
 ```
@@ -168,6 +170,21 @@ getAll() {
 private logger: MyLogger;
 ```
 接着，就可以愉快地使用了！
+
+## 项目部署
+该项目部署`nestjs`应用之前，请先部署`mysql8`和`redis`。
+### docker部署
+该部署方案采用`docker compose`集群部署的方式。
+
+首先，你需要将`nestjs`应用打包为`docker镜像`,运行`pnpm build:docker`命令即可打包完成。
+> 需要注意的是，由于写这份文档时使用的docker版本为`24.0.5`，所以打包命令是`docker buildx b xxx`。
+> 如果你使用的docker版本<19.03，请使用命令`docker build xxx`。
+
+具体配置参考`DockerFile`文件。
+
+其次启动`pnpm start:docker:win`命令以`docker compose`集群的方式启动项目，然后就成功了！
+
+具体配置文件参考`docker-compose.win.yaml`文件。
 
 ## 其它
 如有问题，欢迎[issues](https://github.com/zerotower69/demo-template/issues)提问，如果觉得不错，请给个star。

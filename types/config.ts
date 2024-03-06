@@ -44,6 +44,8 @@ export type MySQLConfig = {
 
 //redis配置
 export type RedisConfig = {
+  //是否启用,默认true
+  enable: boolean;
   host: string;
   port: number;
   username: string;

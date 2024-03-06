@@ -1,0 +1,18 @@
+*.md
+!README.md
+node_modules/
+[a-c].txt
+.git/
+.DS_Store
+.vscode/
+.dockerignore
+.eslintignore
+.eslintrc.js
+.prettierrc
+.prettierignore
+application.yaml
+application.dev.yaml
+src/
+test/
+
+# 注释的语法参考
