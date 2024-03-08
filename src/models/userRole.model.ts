@@ -24,8 +24,10 @@ export class UserRoleModel extends Model {
   id: number;
 
   @ForeignKey(() => RoleModel)
+  @Column(DataType.INTEGER)
   role_id: number;
 
   @ForeignKey(() => UserModel)
+  @Column(DataType.INTEGER)
   user_id: number;
 }

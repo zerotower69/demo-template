@@ -6,8 +6,8 @@ import {
   Model,
   Table,
   Comment,
+  BelongsToMany,
 } from 'sequelize-typescript';
-import { ManyToMany } from 'typeorm';
 import { RoleModel } from './role.model';
 import { UserRoleModel } from './userRole.model';
 
@@ -32,6 +32,6 @@ export class UserModel extends Model {
   @Column(DataType.STRING(100))
   password: string;
 
-  @ManyToMany(() => RoleModel, () => UserRoleModel)
+  @BelongsToMany(() => RoleModel, () => UserRoleModel)
   roles: RoleModel[];
 }
