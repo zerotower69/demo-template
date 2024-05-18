@@ -1,0 +1,65 @@
+# 1. 为工作流定义名字
+name: Build for scroll-image
+
+# 2. 触发条件修改为: 当 指定的分支, 有 push 的时候, 执行任务
+on:
+  push:
+    branches:
+      # 当代码被推送到这个分支时触发相应的工作流
+      - gh-pages
+  # 这个选项可以使你手动在 Action tab 页面触发工作流
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 的权限，以允许部署到 GitHub Pages。
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许一个并发的部署
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+# 3. 创建工作流
+jobs:
+  deploy:  #单次部署的工作描述
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest    # 依赖环境
+
+    steps:                    # 工作流步骤
+      # step 1. 获取源码, 拉取仓库代码
+      - name: Checkout 🛎️             # 步骤名
+        uses: actions/checkout@v3 # 使用插件 => https://github.com/actions/checkout
+
+      # step 2. 使用指定版本 node
+      - name: Use Node  📦              # 步骤名
+        uses: actions/setup-node@v3 # 使用插件 => https://github.com/actions/setup-node
+        with: # 插件携带参数
+          # 记得按最低要求的来
+          node-version: 16.14.2 # 指定 node 版本
+      # step 3. 安装pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          # 如果你指定了pnpm的最低版本要求，需要更改
+          version: '8.10.0'
+      # step 4. 安装依赖并打包
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # 打包输出的目录，建议保持不动
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2    #使用插件 => https://github.com/actions/deploy-pages
