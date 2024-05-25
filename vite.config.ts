@@ -9,12 +9,14 @@ import { createHtmlPlugin } from 'vite-plugin-html'
 import UnoCSS from 'unocss/vite'
 import ProgressBar from 'vite-plugin-progress'
 
-const CWD = process.cwd()
-
 // https://vitejs.dev/config/
 export default defineConfig((config) => {
+  const CWD = process.cwd()
   const { mode, command } = config
-  const { VITE_BASE_URL, VITE_TITLE, VITE_DROP_CONSOLE, VITE_BUILD_PATH } = loadEnv(mode, CWD)
+  const { VITE_BASE_URL, VITE_TITLE, VITE_DROP_CONSOLE } = loadEnv(mode, CWD)
+  const currentVersion = process.env['npm_package_version']!
+  // let buildPath = `output/${mode}/${currentVersion.replaceAll('.','-')}`
+
   return {
     base: VITE_BASE_URL,
     server: {

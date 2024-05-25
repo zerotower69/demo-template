@@ -1,0 +1,8 @@
+FROM nginx:stable-alpine
+
+WORKDIR /app
+
+COPY dist /usr/share/nginx/html/web
+COPY ./nginx.develpment.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80

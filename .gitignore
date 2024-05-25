@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 .DS_Store
 dist
+output
+docker
 dist-ssr
 coverage
 *.local
@@ -28,3 +30,4 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+.env.local
