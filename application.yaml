@@ -1,0 +1,36 @@
+# 服务配置
+server:
+  host: "localhost"
+  port: 3000
+# JWTModule相关配置
+jwt:
+  secret: ""
+  expireIn: '7d' #表示过期时间7天
+# sequelize相关
+mysql:
+  host: 'localhost'
+  port: 你的端口
+  username: "你的用户名"
+  password: "你的密码"
+  database: "数据库"
+  dialect: "mysql"
+  synchronize: true
+  autoLoadModels: true
+  # 打印数据库日志（sequelize）
+  logging: true
+  # 连接池配置
+  pool:
+    max: 5 # 连接池最大连接数量
+    min: 0 # 连接池最小连接数量
+    acquire: 3000 #
+    idle: 10000 #如果一个线程超过10秒钟没有使用过就释放该线程
+redis:
+  enable: false #true/false 表示是否启用redis
+  host: ""
+  port: 你的端口
+  enableAuth: false
+logger:
+  level: 'debug'
+swagger:
+  enable: true
+

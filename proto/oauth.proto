@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package oauth;
+
+service OauthService {
+  rpc FindBook (BookById) returns (Book) {}
+}
+
+message Book {
+  int64 id = 1;
+  string title = 2;
+  string author = 3;
+  string description = 4;
+}
+
+message BookById {
+  int32 id =1;
+}

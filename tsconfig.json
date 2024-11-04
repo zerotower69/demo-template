@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES6",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "typeRoots": ["./node_modules/@types","types","global.d.ts"],
+    "paths": {
+      "@lib/response": [
+        "libs/response/src"
+      ],
+      "@lib/response/*": [
+        "libs/response/src/*"
+      ],
+      "@lib/interface/*": [
+        "libs/interface/src/*"
+      ],
+      "@lib/config": [
+        "libs/config/src"
+      ],
+      "@lib/etcd": [
+        "libs/etcd/src"
+      ],
+      "@lib/etcd/*": [
+        "libs/etcd/src/*"
+      ],
+      "@types": [
+        "types"
+      ],
+      "@types/*":[
+        "types/*"
+      ],
+    }
+  },
+  "include": ["types/*","libs/**/*","apps/**/*","global.d.ts","proto/**/*.proto"]
+}

@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/gateway/src",
+  "compilerOptions": {
+    "assets": [
+      {
+        "include": "proto/**/*.proto",
+        "outDir": "dist/proto"
+      }
+    ],
+    "watchAssets": true,
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/gateway/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/gateway",
+  "projects": {
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "oauth": {
+      "type": "application",
+      "root": "apps/oauth",
+      "entryFile": "main",
+      "sourceRoot": "apps/oauth/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/oauth/tsconfig.app.json"
+      }
+    },
+    "config": {
+      "type": "library",
+      "root": "libs/config",
+      "entryFile": "index",
+      "sourceRoot": "libs/config/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/config/tsconfig.lib.json"
+      }
+    },
+    "response": {
+      "type": "library",
+      "root": "libs/response",
+      "entryFile": "index",
+      "sourceRoot": "libs/response/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/response/tsconfig.lib.json"
+      }
+    },
+    "etcd": {
+      "type": "library",
+      "root": "libs/etcd",
+      "entryFile": "index",
+      "sourceRoot": "libs/etcd/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/etcd/tsconfig.lib.json"
+      }
+    },
+    "interface": {
+      "type": "library",
+      "root": "libs/interface",
+      "entryFile": "index",
+      "sourceRoot": "libs/interface/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/interface/tsconfig.lib.json"
+      }
+    }
+  }
+}

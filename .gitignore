@@ -1,0 +1,9 @@
+# IDE
+.idea
+.vscode
+
+#production
+dist
+node_modules
+tsconfig.build.json
+application.*.yaml
