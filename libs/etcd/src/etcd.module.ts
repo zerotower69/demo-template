@@ -19,8 +19,7 @@ export class EtcdModule {
         {
           provide: ETCD_CLIENT_TOKEN,
           useFactory(options: IOptions) {
-            const client = new Etcd3(options);
-            return client;
+            return new Etcd3(options);
           },
           inject: [ETCD_CLIENT_OPTIONS_TOKEN],
         },
@@ -56,10 +55,10 @@ export class EtcdModule {
         {
           provide: ETCD_CLIENT_TOKEN,
           useFactory(options: IOptions) {
-            const client = new Etcd3({
+            console.log('connecting options: ', JSON.stringify(options));
+            return new Etcd3({
               ...options,
             });
-            return client;
           },
           inject: [ETCD_CLIENT_OPTIONS_TOKEN],
         },

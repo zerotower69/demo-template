@@ -1,0 +1,13 @@
+{
+  "name": "blog-app${service_name}",
+  "version": "1.0.0",
+  "description": "nestjs microservice for my web site",
+  "keywords": [],
+   "scripts": {
+   },
+
+  "author": {
+
+  },
+  "license": "MIT"
+}

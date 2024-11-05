@@ -33,4 +33,10 @@ logger:
   level: 'debug'
 swagger:
   enable: true
+# etcd相关配置，请使用集群的地址访问  也就是etcd-node-1: 172.40.0.2:2379
+etcd:
+  hosts:
+    - "172.40.0.2:2379"  #使用etcd集群的配置
+  username: root
+  password: "good" #记得替换用户名和密码
 

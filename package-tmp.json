@@ -1,0 +1,49 @@
+{
+  "name": " blog-server",
+  "version": "1.0.0",
+  "description": "nestjs microservice for my web site",
+  "keywords": [],
+  "scripts": {
+    "copy-proto": "cp  -r proto dist/proto",
+    "start:gateway:prod": "cross-env NODE_ENV=prod node ./dist/apps/gateway/main.js",
+    "start:oauth:prod": "cross-env NODE_ENV=prod node ./dist/apps/oauth/main.js",
+    "start-all:prod": "npm-run-all -p --print-label start:gateway:prod  start:oauth:prod",
+    "start:gateway:dev": "cross-env NODE_ENV=dev node ./dist/apps/gateway/main.js",
+    "start:oauth:dev": "cross-env NODE_ENV=dev node ./dist/apps/oauth/main.js",
+    "start-all:dev": "npm-run-all -p --print-label start:gateway:dev  start:oauth:dev"
+  },
+  "author": {
+    "name": "zerotower",
+    "url": "https://www.zerotower.cn",
+    "email": "zerotower@163.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@grpc.ts/nestjs-client": "^1.0.4",
+    "@grpc.ts/nestjs-server": "^1.0.5",
+    "@grpc/grpc-js": "^1.12.2",
+    "@grpc/proto-loader": "^0.7.13",
+    "@nestjs/common": "^10.0.0",
+    "@nestjs/config": "^3.3.0",
+    "@nestjs/core": "^10.0.0",
+    "@nestjs/microservices": "^10.4.6",
+    "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/schedule": "^4.1.1",
+    "@nestjs/sequelize": "^10.0.1",
+    "consola": "^3.2.3",
+    "cross-env": "^7.0.3",
+    "detect-port": "^1.6.1",
+    "etcd3": "^1.1.2",
+    "js-yaml": "^4.1.0",
+    "mysql2": "^3.11.3",
+    "npm-run-all": "^4.1.5",
+    "qiniu": "^7.13.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.8.1",
+    "sequelize": "^6.37.5",
+    "sequelize-typescript": "^2.1.6",
+    "winston": "^3.16.0",
+    "yaml": "2.5.1"
+  },
+  "packageManager": "pnpm"
+}

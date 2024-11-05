@@ -1,0 +1,118 @@
+version : "3.8"
+
+services:
+  #注册中心
+  # 当前可用的环境变量：https://github.com/bitnami/containers/tree/main/bitnami/etcd
+  etcd1:
+    container_name: etcd1
+    image: bitnami/etcd:latest
+    environment:
+      - ETCD_NAME=etcd1
+      - ETCD_DATA_DIR=/etcd-data
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://172.40.0.2:2380
+      - ETCD_ADVERTISE_CLIENT_URLS=http://172.40.0.2:2379
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_INITIAL_CLUSTER=etcd1=http://172.40.0.2:2380,etcd2=http://172.40.0.3:2380,etcd3=http://172.40.0.4:2380
+      - ETCD_INITIAL_CLUSTER_STATE=new
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster-1
+      - ETCD_ROOT_USERNAME=root
+      - ETCD_ROOT_PASSWORD=good
+      - ETCD_AUTH=true #确保启用身份验证
+      - ETCD_AUTH_TOKEN=simple
+    networks:
+      blog:
+        ipv4_address: 172.40.0.2
+    ports:
+      - "23791:2379"
+      - "23801:2380"
+    volumes:
+      - etcd-data-node1:/etcd-data
+  etcd2:
+      image: bitnami/etcd:latest
+      container_name: etcd2
+      environment:
+        - ETCD_NAME=etcd2
+        - ETCD_DATA_DIR=/etcd-data
+        - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://172.40.0.3:2380
+        - ETCD_ADVERTISE_CLIENT_URLS=http://172.40.0.3:2379
+        - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+        - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+        - ETCD_INITIAL_CLUSTER=etcd1=http://172.40.0.2:2380,etcd2=http://172.40.0.3:2380,etcd3=http://172.40.0.4:2380
+        - ETCD_INITIAL_CLUSTER_STATE=new
+        - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster-1
+        - ETCD_ROOT_USERNAME=root
+        - ETCD_ROOT_PASSWORD=good
+        - ETCD_AUTH=true #确保启用身份验证
+        - ETCD_AUTH_TOKEN=simple
+      networks:
+        blog:
+          ipv4_address: 172.40.0.3
+      ports:
+          - "23792:2379"
+          - "23802:2380"
+      volumes:
+        - etcd-data-node2:/etcd-data
+  etcd3:
+        image: bitnami/etcd:latest
+        container_name: etcd3
+        environment:
+          - ETCD_NAME=etcd3
+          - ETCD_DATA_DIR=/etcd-data
+          - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://172.40.0.4:2380
+          - ETCD_ADVERTISE_CLIENT_URLS=http://172.40.0.4:2379
+          - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+          - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+          - ETCD_INITIAL_CLUSTER=etcd1=http://172.40.0.2:2380,etcd2=http://172.40.0.3:2380,etcd3=http://172.40.0.4:2380
+          - ETCD_INITIAL_CLUSTER_STATE=new
+          - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster-1
+          - ETCD_ROOT_USERNAME=root
+          - ETCD_ROOT_PASSWORD=good  #后续替换密码
+          - ETCD_AUTH=true #确保启用身份验证
+          - ETCD_AUTH_TOKEN=simple
+        networks:
+          blog:
+            ipv4_address: 172.40.0.4
+        ports:
+          - "23793:2379"
+          - "23803:2380"
+        volumes:
+          - etcd-data-node3:/etcd-data
+  nest-app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "4000"  # 由于使用了replicas (Docker Swarm)的方式，不需要将宿主机端口映射到容器的端口
+    deploy:
+      replicas: 3
+    depends_on:
+      - etcd1
+      - etcd2
+      - etcd3
+    networks:
+      - blog  #不需要再分配ip了，否则又会报错的
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    volumes:
+      - ./build/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "4000:80"  # 注意你的主机上的80口是否已经被占用，通常是在当前的机器上已经存在了一个nginx
+    networks:
+      blog:
+        ipv4_address: 172.40.0.6
+networks:
+  blog:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.40.0.0/16  # 这里之前用了172.20.xxx结果发生了冲突，可以使用docker network ls 查看所有的网络 ，使用docker network rm xxx 删除冲突
+          #网络，如果不能删除（内置的或者被使用了，请使用其它网段替换）
+volumes:
+  etcd-data-node1:
+    driver: local
+  etcd-data-node2:
+    driver: local
+  etcd-data-node3:
+    driver: local

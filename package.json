@@ -9,8 +9,14 @@
     "email": "zerotower@163.com"
   },
   "license": "MIT",
+  "bin": {
+    "generate-package": "scripts/generate-package-json.mjs",
+    "single-build": "scripts/single-build.mjs",
+    "build-all-app": "scripts/build-all-app.mjs"
+  },
   "scripts": {
-    "build": "nest build && && pnpm run copy-proto",
+    "build": "pnpm run copy-proto && gen-proto-ts && build-all-app",
+    "build:docker": "docker build -f docker/Dockerfile -t app-server:1.0.0 .",
     "copy-proto": "cp  -r proto dist/proto",
     "gen-propto-ts": "pnpm gen-grpc-typing",
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
@@ -66,21 +72,26 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.3.1",
     "@types/supertest": "^2.0.12",
+    "@types/yargs": "^17.0.33",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.0",
     "jest": "^29.5.0",
+    "ora": "^8.1.1",
     "prettier": "^3.0.0",
     "source-map-support": "^0.5.21",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "yargs": "^17.7.2"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -88,25 +99,10 @@
       "json",
       "ts"
     ],
-    "rootDir": ".",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
-    },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "./coverage",
-    "testEnvironment": "node",
-    "roots": [
-      "<rootDir>/apps/",
-      "<rootDir>/packages/",
-      "<rootDir>/libs/"
-    ],
-    "moduleNameMapper": {
-      "^@app/commom(|/.*)$": "<rootDir>/packages/common/src/$1",
-      "^@app/response(|/.*)$": "<rootDir>/libs/response/src/$1",
-      "^@app/etcd(|/.*)$": "<rootDir>/libs/etcd/src/$1"
+    "packageManager": "pnpm@8.10.0",
+    "engines": {
+      "node": ">=18.12.0",
+      "pnpm": ">=8.10.0"
     }
   }
 }
